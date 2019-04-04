@@ -1,0 +1,51 @@
+#Q1 
+#Q1a 
+#Use wget to download the url that contain the script. 
+#wget 'https://www.staff.hs-mittweida.de/~wuenschi/data/media/compbiolbook/chapter-10-shell-programming--triplet-stop.sh'
+#ls command is used to check if file has been successfully downloaded.
+#Q1b code as below
+#!/bin/bash
+# save as triplet-stop.sh
+# splits a sequence into triplets
+x=0
+while [ -n "${1:$x:3}" ];  do
+  seq=$seq${1:$x:3}" "
+  x=$(expr $x + 3)
+  if [ ${1:$x:3} == taa ]; then
+     break
+  fi
+done
+
+#use if...then construct to give an error message when input is less than 9 characters
+#[$x -lt 9] is an expression to test if input is less than 9 characters
+if [ $x -lt 9 ]; then
+   echo "error"
+else echo "$seq"
+fi
+
+#Testing if modified code still performs the original task i.e. splitting dna sequence into triplets 
+#./chapter-10-shell-programming--triplet-stop.sh atggtactgtga
+#Testing if modified code meets the new requirements
+#./chapter-10-shell-programming--triplet-stop.sh atggtactgtaa 
+#Testing if modified code gives error message when input dna sequence less than 9 characters 
+#./chapter-10-shell-programming--triplet-stop.sh atg
+
+#Q2
+#Q2a
+#after downloading the file into personal computer, use command scp
+#scp -i 44580053.pem tutes.txt ubuntu@ec2-13-211-204-112.ap-southeast-2.compute.amazonaws.com
+#ls command is used to check whether file has been successfully uploaded. 
+#Q2b
+#sort command is used to sort content of a file and -u option is used to extract unique items 
+
+#Q3
+#for each part, create a sample file to check 
+#Q3a use egrep 
+#egrep '^[[:alpha:]]+ [[:alpha:]]+ [[:alpha:]]+$' 112ex
+#egrep '^[[:alpha:]]+ {1,}[[:alpha:]]+ {1,}[[:alpha:]]+ {0.}+$' 112ex
+#Q3b use grep with -E option and -vE option
+#grep -E '^-[1-9]+' | grep -vE [.]: to match negative integers while excluding "-0" and unmatching negative decimals
+#Q3c use egrep with -o to print out match results 
+#egrep -o '[[:space:]][-0-9]+\.[0-9]+[[:space:]]' 114ex.txt
+#Q3d use grep with -Ew and -vEw option to print out lines containing required word and omit lines containing required word
+#grep -Ew 'hydrogenase' 116ex.txt | grep -vEw 'dehydrogenase'
