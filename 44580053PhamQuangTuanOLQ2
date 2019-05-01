@@ -1,0 +1,19 @@
+#Q1a
+wget "http://www.staff.hs-mittweida.de/~wuenschi/data/media/compbiolbook/chapter-11-regex--structure.pdb" #to download the file 
+cat chapter-11-regex--structure.pdb > structure.pdb #rename the file into structure.pdb
+sed -n 's/Beisel/Weisel/p' structure.pdb #Change Beisel into Weisel 
+#Q1b
+sed '1,3d' structure.pdb #delete lines 1 to lines 3
+#Q1c
+sed -n '5,10p' structure.pdb #print from lines 5 to line 10 
+#Q1d
+sed '/MET/d' structure.pdb #delete lines containing the word MET
+#Q1e
+sed -n '/HELIX.*ILE/p' structure.pdb #print where HELIX line containing ILE
+#Q1f
+sed '/^H/s/$/***/' structure.pdb $append 3 stars to the end of lines starting with "H"
+#Q1g 
+sed '/SEQRES/s/^.*$/SEQ/' structure.pdb #replace SEQRES line with SEQ line 
+#Q1h 
+scp -i 44580053.pem jabberwocky.txt  ubuntu@ec2-13-211-204-112.ap-southeast-2.compute.amazonaws.com: #upload file onto AWS account
+sed ‘/^[[:space:]]*$/d’ jabberwocky.txt #remove blank lines from the text. 
