@@ -1,0 +1,95 @@
+#Q1
+#After successfully downloaded twain.txt into computer, use the following command to upload onto AWS account: 
+scp -i 44580053.pem twain.txt ubuntu@ec2-13-211-204-112.ap-southeast-2.compute.amazonaws.com:
+#in AWS account
+nano q1.py #create a python program
+#in nano editor 
+import os
+os.chdir('C:\\Users\\Tuan')
+with open('twain.txt', 'r') as file :
+  twain = file.read()
+twain = twain.replace('Huck', 'HucK')
+with open('twain.txt', 'w') as file:
+  file.write(twain)
+#alternatively 
+sed -n 's/Huck/HucK/p' twain.txt
+
+#Q3
+#create a python code 
+test=int(input('Test an integer = ')) #Input prompt for an integer to test
+if test % 100 == 0: #test if the integer is divisible by 100
+        if test % 400 == 0: #test if the integer is divisible by 400
+                print('Given integer is a leap year') #if so, then print integer corresponds to a leap year
+        else:
+                print('Given integer is not a leap year') #otherwise print integer does not correspond to a leap year
+elif test % 4 == 0: #if not divisble by 100 test if integer is divisible by 4
+        print('Given integer is a leap year') #if so then integer corresponds to a leap year
+else:
+        print('Given integer is not a leap year') #otherwise integer does not correspond to a leap year
+
+#Test for 1900,1996,2000 and 2004 
+
+#Q4
+import random
+import sys
+a=int(sys.argv[1]) #set up input a in command line
+b=int(sys.argv[2]) #set up input b in command line
+print('x=',random.randint(a,b)) #print x as an integer between a and b
+
+#Test for a=2 and b=6
+#in AWS account
+python3 question4.py 2 6 
+
+#Q5
+#Question 5
+import sys
+d=int(sys.argv[1]) #set up input date in command line
+m=int(sys.argv[2]) #set up input month in command line
+if m==2 and d >=30: #test for validity when month = 2 and day >= 30
+                sys.exit('Invalid date for February')
+elif m>=13: #test for validity for month >= 13
+        sys.exit('Invalid month')
+elif d>=32: #test for validity for day >= 32
+        sys.exit('Invalid date')
+elif 3 < m < 6:
+        print('True')
+elif 3 == m and d > 20:
+        print('True')
+elif 6 == m and d < 20:
+        print('True')
+else:
+        print('False')
+
+#Test for validity 
+python3 question5.py 30 2
+python3 question5.py 30 13
+python3 question5.py 32 5
+
+#Testing for working
+python question5.py 19 6 #for 19/6
+python question5.py 19 3 #for 19/3
+python question5.py 26 5 #for 26/5
+
+#Question6
+#Question6
+import math
+import sys
+P=int(input('Principal= ')) #set up for input principal amount of money invested
+if P<0: #test if principal is negative
+        sys.exit('Principal amount cannot be negative')
+r=float(input('Interest rate= ')) #set up for input interest rate
+if r>=1: #test if interest rate % is greater than 1
+        sys.exit('Interest rate % percentage cannot be more than 1')
+t=int(input('Number of years= ')) #set up for input number of years invested
+if t<0: #test if time invested is negative
+        sys.exit('time invested cannot be negative')
+print('Accumulation=',P*math.e**(r*t)) #print out accumulated amount of money after number of years invested at given interest rate
+
+#Test for P=500, i=0.05, t=5
+#Test for P=200, i=0.01, t=10
+#Test for validity for negative principal and time invested, interest rate in percentage cannot be more than 1 
+
+
+
+
+
